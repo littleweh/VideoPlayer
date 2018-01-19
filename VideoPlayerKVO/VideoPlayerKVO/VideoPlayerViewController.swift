@@ -41,6 +41,16 @@ class VideoPlayerViewController: UIViewController {
             ),
             for: .normal
         )
+
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.sizeToFit()
+
+        button.addTarget(
+            self,
+            action: #selector(playbackButtonTapped),
+            for: .touchUpInside
+        )
+
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -55,10 +65,18 @@ class VideoPlayerViewController: UIViewController {
             ),
             for: .normal
         )
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.sizeToFit()
+
+        button.addTarget(
+            self,
+            action: #selector(audioControlButtonTapped),
+            for: .touchUpInside
+        )
+
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,10 +141,50 @@ class VideoPlayerViewController: UIViewController {
 
 
     func setupPlaybackButton() {
-        
+        NSLayoutConstraint.activate([
+            playbackButton.leftAnchor.constraint(equalTo: buttonContainerView.leftAnchor, constant: 20),
+            playbackButton.centerYAnchor.constraint(equalTo: buttonContainerView.centerYAnchor),
+            playbackButton.heightAnchor.constraint(equalToConstant: 19),
+            playbackButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 33)
+        ])
     }
 
     func setupAudioControlButton() {
+        NSLayoutConstraint.activate([
+            audioControlButton.rightAnchor.constraint(equalTo: buttonContainerView.rightAnchor, constant: -16),
+            audioControlButton.centerYAnchor.constraint(equalTo: buttonContainerView.centerYAnchor),
+            audioControlButton.heightAnchor.constraint(equalToConstant: 19),
+            audioControlButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 39)
+        ])
+    }
+
+    @objc func playbackButtonTapped() {
+        if playbackButton.currentTitle == NSLocalizedString("Play", comment: "playbackbutton") {
+            playbackButton.setTitle(
+                NSLocalizedString("Pause", comment: "playbackbutton"),
+                for: .normal
+            )
+        } else {
+            playbackButton.setTitle(
+                NSLocalizedString("Play", comment: "playbackbutton"),
+                for: .normal
+            )
+        }
+
+    }
+
+    @objc func audioControlButtonTapped() {
+        if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
+            audioControlButton.setTitle(
+                NSLocalizedString("Unmute", comment: "audioControlButton"),
+                for: .normal
+            )
+        } else {
+            audioControlButton.setTitle(
+                NSLocalizedString("Mute", comment: "audioControlButton"),
+                for: .normal
+            )
+        }
 
     }
 
