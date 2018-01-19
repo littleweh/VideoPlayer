@@ -24,17 +24,59 @@ class VideoPlayerViewController: UIViewController {
     // searchbar
 
     // button and container view
+    var buttonContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    var playbackButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(
+            NSLocalizedString(
+                "Play",
+                comment: "Play/pause button"
+            ),
+            for: .normal
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    var audioControlButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(
+            NSLocalizedString(
+                "Mute",
+                comment: "Mute/Unmute button"
+            ),
+            for: .normal
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.addSubview(videoPlayerContainerView)
+        self.view.addSubview(buttonContainerView)
+        self.buttonContainerView.addSubview(playbackButton)
+        self.buttonContainerView.addSubview(audioControlButton)
 
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setupVideoPlayerContainerView()
+        setupButtonContainerView()
+        setupPlaybackButton()
+        setupAudioControlButton()
+
 
     }
 
@@ -66,6 +108,25 @@ class VideoPlayerViewController: UIViewController {
         NSLayoutConstraint.activate([
             videoPlayerContainerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
         ])
+
+    }
+
+    func setupButtonContainerView() {
+        buttonContainerView.backgroundColor = .red
+        NSLayoutConstraint.activate([
+            buttonContainerView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
+            buttonContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            buttonContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            buttonContainerView.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+
+
+    func setupPlaybackButton() {
+        
+    }
+
+    func setupAudioControlButton() {
 
     }
 
