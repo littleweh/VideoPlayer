@@ -23,6 +23,8 @@ class VideoPlayerViewController: UIViewController {
 
     // searchbar
 
+    var searchBar = UISearchBar()
+
     // button and container view
     var buttonContainerView: UIView = {
         let view = UIView()
@@ -75,7 +77,8 @@ class VideoPlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        searchBar.delegate = self
+        self.view.addSubview(searchBar)
         self.view.addSubview(videoPlayerContainerView)
         self.view.addSubview(buttonContainerView)
         self.buttonContainerView.addSubview(playbackButton)
@@ -85,6 +88,7 @@ class VideoPlayerViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        setupSearchBar()
         setupVideoPlayerContainerView()
         setupButtonContainerView()
         setupPlaybackButton()
@@ -100,12 +104,12 @@ class VideoPlayerViewController: UIViewController {
         }
 
         self.videoPlayer = AVPlayer(url: videoURL)
-        self.videoPlayer.addObserver(
-            self,
-            forKeyPath: "rate",
-            options: .new,
-            context: nil
-        )
+//        self.videoPlayer.addObserver(
+//            self,
+//            forKeyPath: "rate",
+//            options: .new,
+//            context: nil
+//        )
         let layer = AVPlayerLayer(player: self.videoPlayer)
         layer.frame = videoPlayerContainerView.bounds
         layer.videoGravity = AVLayerVideoGravity.resizeAspect
@@ -115,17 +119,22 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "rate" {
-            if self.videoPlayer.rate == 1.0 {
 
-            } else if self.videoPlayer.rate == 0.0 {
-
-            } else {
-
-            }
-        }
-    }
+//    override func observeValue(
+//        forKeyPath keyPath: String?,
+//        of object: Any?, change: [NSKeyValueChangeKey: Any]?,
+//        context: UnsafeMutableRawPointer?
+//    ) {
+//        if keyPath == "rate" {
+//            if self.videoPlayer.rate == 1.0 {
+//
+//            } else if self.videoPlayer.rate == 0.0 {
+//
+//            } else {
+//
+//            }
+//        }
+//    }
 
     @objc func playbackButtonTapped() {
         if self.videoPlayer.rate == 0.0 {
@@ -140,6 +149,34 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
+    @objc func audioControlButtonTapped() {
+        if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
+            audioControlButton.setTitle(
+                NSLocalizedString("Unmute", comment: "audioControlButton"),
+                for: .normal
+            )
+            self.videoPlayer.isMuted = true
+        } else {
+            audioControlButton.setTitle(
+                NSLocalizedString("Mute", comment: "audioControlButton"),
+                for: .normal
+            )
+            self.videoPlayer.isMuted = false
+        }
+
+    }
+
+    func setupSearchBar() {
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 7),
+            searchBar.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 8),
+            searchBar.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -8),
+            searchBar.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        searchBar.placeholder = NSLocalizedString("Enter URL of video", comment: "")
+    }
+
     func setupVideoPlayerContainerView() {
         // autolayout
         self.videoPlayerContainerView.frame = CGRect(
@@ -150,10 +187,10 @@ class VideoPlayerViewController: UIViewController {
         )
 
         NSLayoutConstraint.activate([
-            videoPlayerContainerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            videoPlayerContainerView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            videoPlayerContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            videoPlayerContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
         ])
-
-        playVideoWith(url: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
 
     }
 
@@ -185,26 +222,24 @@ class VideoPlayerViewController: UIViewController {
         ])
     }
 
-    @objc func audioControlButtonTapped() {
-        if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
-            audioControlButton.setTitle(
-                NSLocalizedString("Unmute", comment: "audioControlButton"),
-                for: .normal
-            )
-            self.videoPlayer.isMuted = true
-        } else {
-            audioControlButton.setTitle(
-                NSLocalizedString("Mute", comment: "audioControlButton"),
-                for: .normal
-            )
-            self.videoPlayer.isMuted = false
-        }
 
-    }
 
     deinit {
         self.videoPlayer.removeObserver(self, forKeyPath: "rate")
         print("VideoPlayerViewController deinit")
     }
 
+}
+
+extension VideoPlayerViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard
+            let urlString = searchBar.text
+        else {
+            // error handling
+            return
+        }
+        playVideoWith(url: urlString)
+        self.searchBar.endEditing(true)
+    }
 }
