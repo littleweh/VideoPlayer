@@ -21,11 +21,8 @@ class VideoPlayerViewController: UIViewController {
         return view
     }()
 
-    // searchbar
-
     var searchBar = UISearchBar()
 
-    // button and container view
     var buttonContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -111,14 +108,14 @@ class VideoPlayerViewController: UIViewController {
 //            context: nil
 //        )
         let layer = AVPlayerLayer(player: self.videoPlayer)
-        layer.frame = videoPlayerContainerView.bounds
+        layer.frame = videoPlayerContainerView.frame
         layer.videoGravity = AVLayerVideoGravity.resizeAspect
         videoPlayerContainerView.layer.addSublayer(layer)
+
         self.videoPlayer.play()
         self.playbackButton.setTitle(playbackButtonTitle, for: .normal)
 
     }
-
 
 //    override func observeValue(
 //        forKeyPath keyPath: String?,
@@ -127,9 +124,9 @@ class VideoPlayerViewController: UIViewController {
 //    ) {
 //        if keyPath == "rate" {
 //            if self.videoPlayer.rate == 1.0 {
-//
+//                playbackButton.setTitle("Pause", for: .normal)
 //            } else if self.videoPlayer.rate == 0.0 {
-//
+//                playbackButton.setTitle("Play", for: .normal)
 //            } else {
 //
 //            }
@@ -166,12 +163,15 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
+    // MARK: UI
+
     func setupSearchBar() {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.barTintColor = .clear
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 7),
-            searchBar.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 8),
-            searchBar.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -8),
+            searchBar.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            searchBar.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             searchBar.heightAnchor.constraint(equalToConstant: 30)
         ])
         searchBar.placeholder = NSLocalizedString("Enter URL of video", comment: "")
@@ -182,21 +182,21 @@ class VideoPlayerViewController: UIViewController {
         self.videoPlayerContainerView.frame = CGRect(
             x: 0,
             y: 0,
-            width: self.view.frame.width,
-            height: self.view.frame.height
+            width: self.view.bounds.width,
+            height: self.view.bounds.height
         )
 
         NSLayoutConstraint.activate([
             videoPlayerContainerView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             videoPlayerContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            videoPlayerContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            videoPlayerContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
 
     }
 
     func setupButtonContainerView() {
-        buttonContainerView.backgroundColor = .red
         NSLayoutConstraint.activate([
+            buttonContainerView.topAnchor.constraint(equalTo: videoPlayerContainerView.bottomAnchor),
             buttonContainerView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             buttonContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             buttonContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
@@ -222,7 +222,7 @@ class VideoPlayerViewController: UIViewController {
         ])
     }
 
-
+    // MARK: deinit
 
     deinit {
         self.videoPlayer.removeObserver(self, forKeyPath: "rate")
@@ -230,6 +230,8 @@ class VideoPlayerViewController: UIViewController {
     }
 
 }
+
+// MARK: SearBarDelegate
 
 extension VideoPlayerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
