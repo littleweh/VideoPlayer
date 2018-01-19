@@ -31,20 +31,13 @@ class VideoPlayerViewController: UIViewController {
         return view
     }()
 
+    var playbackButtonTitle = NSLocalizedString("Pause", comment: "")
+
     var playbackButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
-        button.setTitle(
-            NSLocalizedString(
-                "Play",
-                comment: "Play/pause button"
-            ),
-            for: .normal
-        )
-
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.sizeToFit()
-
         button.addTarget(
             self,
             action: #selector(playbackButtonTapped),
@@ -78,6 +71,8 @@ class VideoPlayerViewController: UIViewController {
         return button
     }()
 
+    @objc var videoPlayer = AVPlayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -94,8 +89,6 @@ class VideoPlayerViewController: UIViewController {
         setupButtonContainerView()
         setupPlaybackButton()
         setupAudioControlButton()
-
-
     }
 
     func playVideoWith(url: String) {
@@ -106,12 +99,45 @@ class VideoPlayerViewController: UIViewController {
             return
         }
 
-        let player = AVPlayer(url: videoURL)
-        let layer = AVPlayerLayer(player: player)
+        self.videoPlayer = AVPlayer(url: videoURL)
+        self.videoPlayer.addObserver(
+            self,
+            forKeyPath: "rate",
+            options: .new,
+            context: nil
+        )
+        let layer = AVPlayerLayer(player: self.videoPlayer)
         layer.frame = videoPlayerContainerView.bounds
         layer.videoGravity = AVLayerVideoGravity.resizeAspect
         videoPlayerContainerView.layer.addSublayer(layer)
-        player.play()
+        self.videoPlayer.play()
+        self.playbackButton.setTitle(playbackButtonTitle, for: .normal)
+
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "rate" {
+            if self.videoPlayer.rate == 1.0 {
+
+            } else if self.videoPlayer.rate == 0.0 {
+
+            } else {
+
+            }
+        }
+    }
+
+    @objc func playbackButtonTapped() {
+        if self.videoPlayer.rate == 0.0 {
+            self.videoPlayer.play()
+            print("play")
+        } else if self.videoPlayer.rate == 1.0 {
+            self.videoPlayer.pause()
+            print("pause")
+        } else {
+            print("unknown")
+        }
+
     }
 
     func setupVideoPlayerContainerView() {
@@ -127,6 +153,8 @@ class VideoPlayerViewController: UIViewController {
             videoPlayerContainerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
         ])
 
+        playVideoWith(url: "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8")
+
     }
 
     func setupButtonContainerView() {
@@ -138,7 +166,6 @@ class VideoPlayerViewController: UIViewController {
             buttonContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-
 
     func setupPlaybackButton() {
         NSLayoutConstraint.activate([
@@ -158,37 +185,25 @@ class VideoPlayerViewController: UIViewController {
         ])
     }
 
-    @objc func playbackButtonTapped() {
-        if playbackButton.currentTitle == NSLocalizedString("Play", comment: "playbackbutton") {
-            playbackButton.setTitle(
-                NSLocalizedString("Pause", comment: "playbackbutton"),
-                for: .normal
-            )
-        } else {
-            playbackButton.setTitle(
-                NSLocalizedString("Play", comment: "playbackbutton"),
-                for: .normal
-            )
-        }
-
-    }
-
     @objc func audioControlButtonTapped() {
         if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
             audioControlButton.setTitle(
                 NSLocalizedString("Unmute", comment: "audioControlButton"),
                 for: .normal
             )
+            self.videoPlayer.isMuted = true
         } else {
             audioControlButton.setTitle(
                 NSLocalizedString("Mute", comment: "audioControlButton"),
                 for: .normal
             )
+            self.videoPlayer.isMuted = false
         }
 
     }
 
     deinit {
+        self.videoPlayer.removeObserver(self, forKeyPath: "rate")
         print("VideoPlayerViewController deinit")
     }
 
