@@ -101,12 +101,12 @@ class VideoPlayerViewController: UIViewController {
         }
 
         self.videoPlayer = AVPlayer(url: videoURL)
-//        self.videoPlayer.addObserver(
-//            self,
-//            forKeyPath: "rate",
-//            options: .new,
-//            context: nil
-//        )
+        self.videoPlayer.addObserver(
+            self,
+            forKeyPath: "rate",
+            options: .new,
+            context: nil
+        )
         let layer = AVPlayerLayer(player: self.videoPlayer)
         layer.frame = videoPlayerContainerView.frame
         layer.videoGravity = AVLayerVideoGravity.resizeAspect
@@ -117,21 +117,22 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
-//    override func observeValue(
-//        forKeyPath keyPath: String?,
-//        of object: Any?, change: [NSKeyValueChangeKey: Any]?,
-//        context: UnsafeMutableRawPointer?
-//    ) {
-//        if keyPath == "rate" {
-//            if self.videoPlayer.rate == 1.0 {
-//                playbackButton.setTitle("Pause", for: .normal)
-//            } else if self.videoPlayer.rate == 0.0 {
-//                playbackButton.setTitle("Play", for: .normal)
-//            } else {
-//
-//            }
-//        }
-//    }
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?, change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        if keyPath == "rate" {
+            if let newRate = (change?[NSKeyValueChangeKey.newKey] as? NSNumber)?.doubleValue {
+                print(newRate)
+                if newRate == 0.0 {
+                    playbackButton.setTitle("Play", for: .normal)
+                } else {
+                    playbackButton.setTitle("Pause", for: .normal)
+                }
+            }
+        }
+    }
 
     @objc func playbackButtonTapped() {
         if self.videoPlayer.rate == 0.0 {
