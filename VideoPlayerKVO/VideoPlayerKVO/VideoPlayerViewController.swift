@@ -21,9 +21,8 @@ class VideoPlayerViewController: UIViewController {
         return view
     }()
 
-    // searchbar
+    var searchBar = UISearchBar()
 
-    // button and container view
     var buttonContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -31,20 +30,13 @@ class VideoPlayerViewController: UIViewController {
         return view
     }()
 
+    var playbackButtonTitle = NSLocalizedString("Pause", comment: "")
+
     var playbackButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
-        button.setTitle(
-            NSLocalizedString(
-                "Play",
-                comment: "Play/pause button"
-            ),
-            for: .normal
-        )
-
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.sizeToFit()
-
         button.addTarget(
             self,
             action: #selector(playbackButtonTapped),
@@ -78,9 +70,12 @@ class VideoPlayerViewController: UIViewController {
         return button
     }()
 
+    @objc var videoPlayer = AVPlayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        searchBar.delegate = self
+        self.view.addSubview(searchBar)
         self.view.addSubview(videoPlayerContainerView)
         self.view.addSubview(buttonContainerView)
         self.buttonContainerView.addSubview(playbackButton)
@@ -90,12 +85,11 @@ class VideoPlayerViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        setupSearchBar()
         setupVideoPlayerContainerView()
         setupButtonContainerView()
         setupPlaybackButton()
         setupAudioControlButton()
-
-
     }
 
     func playVideoWith(url: String) {
@@ -106,12 +100,82 @@ class VideoPlayerViewController: UIViewController {
             return
         }
 
-        let player = AVPlayer(url: videoURL)
-        let layer = AVPlayerLayer(player: player)
-        layer.frame = videoPlayerContainerView.bounds
+        self.videoPlayer = AVPlayer(url: videoURL)
+        self.videoPlayer.addObserver(
+            self,
+            forKeyPath: "rate",
+            options: .new,
+            context: nil
+        )
+        let layer = AVPlayerLayer(player: self.videoPlayer)
+        layer.frame = videoPlayerContainerView.frame
         layer.videoGravity = AVLayerVideoGravity.resizeAspect
         videoPlayerContainerView.layer.addSublayer(layer)
-        player.play()
+
+        self.videoPlayer.play()
+        self.playbackButton.setTitle(playbackButtonTitle, for: .normal)
+
+    }
+
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?, change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        if keyPath == "rate" {
+            if let newRate = (change?[NSKeyValueChangeKey.newKey] as? NSNumber)?.doubleValue {
+                print(newRate)
+                if newRate == 0.0 {
+                    playbackButton.setTitle("Play", for: .normal)
+                } else {
+                    playbackButton.setTitle("Pause", for: .normal)
+                }
+            }
+        }
+    }
+
+    @objc func playbackButtonTapped() {
+        if self.videoPlayer.rate == 0.0 {
+            self.videoPlayer.play()
+            print("play")
+        } else if self.videoPlayer.rate == 1.0 {
+            self.videoPlayer.pause()
+            print("pause")
+        } else {
+            print("unknown")
+        }
+
+    }
+
+    @objc func audioControlButtonTapped() {
+        if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
+            audioControlButton.setTitle(
+                NSLocalizedString("Unmute", comment: "audioControlButton"),
+                for: .normal
+            )
+            self.videoPlayer.isMuted = true
+        } else {
+            audioControlButton.setTitle(
+                NSLocalizedString("Mute", comment: "audioControlButton"),
+                for: .normal
+            )
+            self.videoPlayer.isMuted = false
+        }
+
+    }
+
+    // MARK: UI
+
+    func setupSearchBar() {
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.barTintColor = .clear
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor, constant: 7),
+            searchBar.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            searchBar.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            searchBar.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        searchBar.placeholder = NSLocalizedString("Enter URL of video", comment: "")
     }
 
     func setupVideoPlayerContainerView() {
@@ -119,26 +183,27 @@ class VideoPlayerViewController: UIViewController {
         self.videoPlayerContainerView.frame = CGRect(
             x: 0,
             y: 0,
-            width: self.view.frame.width,
-            height: self.view.frame.height
+            width: self.view.bounds.width,
+            height: self.view.bounds.height
         )
 
         NSLayoutConstraint.activate([
-            videoPlayerContainerView.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor)
+            videoPlayerContainerView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            videoPlayerContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            videoPlayerContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
 
     }
 
     func setupButtonContainerView() {
-        buttonContainerView.backgroundColor = .red
         NSLayoutConstraint.activate([
+            buttonContainerView.topAnchor.constraint(equalTo: videoPlayerContainerView.bottomAnchor),
             buttonContainerView.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor),
             buttonContainerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             buttonContainerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             buttonContainerView.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-
 
     func setupPlaybackButton() {
         NSLayoutConstraint.activate([
@@ -158,38 +223,26 @@ class VideoPlayerViewController: UIViewController {
         ])
     }
 
-    @objc func playbackButtonTapped() {
-        if playbackButton.currentTitle == NSLocalizedString("Play", comment: "playbackbutton") {
-            playbackButton.setTitle(
-                NSLocalizedString("Pause", comment: "playbackbutton"),
-                for: .normal
-            )
-        } else {
-            playbackButton.setTitle(
-                NSLocalizedString("Play", comment: "playbackbutton"),
-                for: .normal
-            )
-        }
-
-    }
-
-    @objc func audioControlButtonTapped() {
-        if audioControlButton.currentTitle == NSLocalizedString("Mute", comment: "audioControlButton") {
-            audioControlButton.setTitle(
-                NSLocalizedString("Unmute", comment: "audioControlButton"),
-                for: .normal
-            )
-        } else {
-            audioControlButton.setTitle(
-                NSLocalizedString("Mute", comment: "audioControlButton"),
-                for: .normal
-            )
-        }
-
-    }
+    // MARK: deinit
 
     deinit {
+        self.videoPlayer.removeObserver(self, forKeyPath: "rate")
         print("VideoPlayerViewController deinit")
     }
 
+}
+
+// MARK: SearBarDelegate
+
+extension VideoPlayerViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard
+            let urlString = searchBar.text
+        else {
+            // error handling
+            return
+        }
+        playVideoWith(url: urlString)
+        self.searchBar.endEditing(true)
+    }
 }
