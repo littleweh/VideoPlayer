@@ -7,73 +7,98 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7968BCDC2011B68B00412D93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968BCDB2011B68B00412D93 /* AppDelegate.swift */; };
-		7968BCDE2011B68B00412D93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968BCDD2011B68B00412D93 /* ViewController.swift */; };
-		7968BCE12011B68B00412D93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7968BCDF2011B68B00412D93 /* Main.storyboard */; };
-		7968BCE32011B68B00412D93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7968BCE22011B68B00412D93 /* Assets.xcassets */; };
-		7968BCE62011B68B00412D93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7968BCE42011B68B00412D93 /* LaunchScreen.storyboard */; };
+		6E237C6A425B6D197B45426F /* Pods_VideoPlayerKVO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76BB6489D1D497A737EB20E /* Pods_VideoPlayerKVO.framework */; };
+		790D7A3E2011B86A00367249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D7A3D2011B86A00367249 /* AppDelegate.swift */; };
+		790D7A452011B86A00367249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 790D7A442011B86A00367249 /* Assets.xcassets */; };
+		790D7A482011B86A00367249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 790D7A462011B86A00367249 /* LaunchScreen.storyboard */; };
+		7963900B2011BAA8000B122B /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963900A2011BAA8000B122B /* VideoPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7968BCD82011B68B00412D93 /* VideoPlayerKVO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayerKVO.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7968BCDB2011B68B00412D93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7968BCDD2011B68B00412D93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7968BCE02011B68B00412D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7968BCE22011B68B00412D93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7968BCE52011B68B00412D93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7968BCE72011B68B00412D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FF0E37E464FA0580096437C /* Pods-VideoPlayerKVO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoPlayerKVO.release.xcconfig"; path = "Pods/Target Support Files/Pods-VideoPlayerKVO/Pods-VideoPlayerKVO.release.xcconfig"; sourceTree = "<group>"; };
+		48307AEA80CFECEEE288BE3E /* Pods-VideoPlayerKVO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoPlayerKVO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VideoPlayerKVO/Pods-VideoPlayerKVO.debug.xcconfig"; sourceTree = "<group>"; };
+		790D7A3A2011B86A00367249 /* VideoPlayerKVO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayerKVO.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		790D7A3D2011B86A00367249 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		790D7A442011B86A00367249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		790D7A472011B86A00367249 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		790D7A492011B86A00367249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7963900A2011BAA8000B122B /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		D76BB6489D1D497A737EB20E /* Pods_VideoPlayerKVO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoPlayerKVO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7968BCD52011B68B00412D93 /* Frameworks */ = {
+		790D7A372011B86A00367249 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E237C6A425B6D197B45426F /* Pods_VideoPlayerKVO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7968BCCF2011B68B00412D93 = {
+		1C9ED92AA09FCB3BF915D142 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7968BCDA2011B68B00412D93 /* VideoPlayerKVO */,
-				7968BCD92011B68B00412D93 /* Products */,
+				D76BB6489D1D497A737EB20E /* Pods_VideoPlayerKVO.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		790D7A312011B86A00367249 = {
+			isa = PBXGroup;
+			children = (
+				790D7A3C2011B86A00367249 /* VideoPlayerKVO */,
+				790D7A3B2011B86A00367249 /* Products */,
+				F354B7157EFDD59257FCC192 /* Pods */,
+				1C9ED92AA09FCB3BF915D142 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		7968BCD92011B68B00412D93 /* Products */ = {
+		790D7A3B2011B86A00367249 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7968BCD82011B68B00412D93 /* VideoPlayerKVO.app */,
+				790D7A3A2011B86A00367249 /* VideoPlayerKVO.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7968BCDA2011B68B00412D93 /* VideoPlayerKVO */ = {
+		790D7A3C2011B86A00367249 /* VideoPlayerKVO */ = {
 			isa = PBXGroup;
 			children = (
-				7968BCDB2011B68B00412D93 /* AppDelegate.swift */,
-				7968BCDD2011B68B00412D93 /* ViewController.swift */,
-				7968BCDF2011B68B00412D93 /* Main.storyboard */,
-				7968BCE22011B68B00412D93 /* Assets.xcassets */,
-				7968BCE42011B68B00412D93 /* LaunchScreen.storyboard */,
-				7968BCE72011B68B00412D93 /* Info.plist */,
+				790D7A3D2011B86A00367249 /* AppDelegate.swift */,
+				7963900A2011BAA8000B122B /* VideoPlayerViewController.swift */,
+				790D7A442011B86A00367249 /* Assets.xcassets */,
+				790D7A462011B86A00367249 /* LaunchScreen.storyboard */,
+				790D7A492011B86A00367249 /* Info.plist */,
 			);
 			path = VideoPlayerKVO;
+			sourceTree = "<group>";
+		};
+		F354B7157EFDD59257FCC192 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48307AEA80CFECEEE288BE3E /* Pods-VideoPlayerKVO.debug.xcconfig */,
+				0FF0E37E464FA0580096437C /* Pods-VideoPlayerKVO.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7968BCD72011B68B00412D93 /* VideoPlayerKVO */ = {
+		790D7A392011B86A00367249 /* VideoPlayerKVO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7968BCEA2011B68B00412D93 /* Build configuration list for PBXNativeTarget "VideoPlayerKVO" */;
+			buildConfigurationList = 790D7A4C2011B86A00367249 /* Build configuration list for PBXNativeTarget "VideoPlayerKVO" */;
 			buildPhases = (
-				7968BCD42011B68B00412D93 /* Sources */,
-				7968BCD52011B68B00412D93 /* Frameworks */,
-				7968BCD62011B68B00412D93 /* Resources */,
+				B6F608B41D08E2CF167DAF5C /* [CP] Check Pods Manifest.lock */,
+				790D7A362011B86A00367249 /* Sources */,
+				790D7A372011B86A00367249 /* Frameworks */,
+				790D7A382011B86A00367249 /* Resources */,
+				9DE3D97E7E87DD5B45B4C10C /* [CP] Embed Pods Frameworks */,
+				CDB7DCED1570F3EA89014570 /* [CP] Copy Pods Resources */,
+				796390092011B9A6000B122B /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -81,26 +106,26 @@
 			);
 			name = VideoPlayerKVO;
 			productName = VideoPlayerKVO;
-			productReference = 7968BCD82011B68B00412D93 /* VideoPlayerKVO.app */;
+			productReference = 790D7A3A2011B86A00367249 /* VideoPlayerKVO.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7968BCD02011B68B00412D93 /* Project object */ = {
+		790D7A322011B86A00367249 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = LostRfounds;
 				TargetAttributes = {
-					7968BCD72011B68B00412D93 = {
+					790D7A392011B86A00367249 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 7968BCD32011B68B00412D93 /* Build configuration list for PBXProject "VideoPlayerKVO" */;
+			buildConfigurationList = 790D7A352011B86A00367249 /* Build configuration list for PBXProject "VideoPlayerKVO" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -108,54 +133,110 @@
 				en,
 				Base,
 			);
-			mainGroup = 7968BCCF2011B68B00412D93;
-			productRefGroup = 7968BCD92011B68B00412D93 /* Products */;
+			mainGroup = 790D7A312011B86A00367249;
+			productRefGroup = 790D7A3B2011B86A00367249 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7968BCD72011B68B00412D93 /* VideoPlayerKVO */,
+				790D7A392011B86A00367249 /* VideoPlayerKVO */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7968BCD62011B68B00412D93 /* Resources */ = {
+		790D7A382011B86A00367249 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7968BCE62011B68B00412D93 /* LaunchScreen.storyboard in Resources */,
-				7968BCE32011B68B00412D93 /* Assets.xcassets in Resources */,
-				7968BCE12011B68B00412D93 /* Main.storyboard in Resources */,
+				790D7A482011B86A00367249 /* LaunchScreen.storyboard in Resources */,
+				790D7A452011B86A00367249 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		796390092011B9A6000B122B /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+		};
+		9DE3D97E7E87DD5B45B4C10C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VideoPlayerKVO/Pods-VideoPlayerKVO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6F608B41D08E2CF167DAF5C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VideoPlayerKVO-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDB7DCED1570F3EA89014570 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VideoPlayerKVO/Pods-VideoPlayerKVO-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		7968BCD42011B68B00412D93 /* Sources */ = {
+		790D7A362011B86A00367249 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7968BCDE2011B68B00412D93 /* ViewController.swift in Sources */,
-				7968BCDC2011B68B00412D93 /* AppDelegate.swift in Sources */,
+				790D7A3E2011B86A00367249 /* AppDelegate.swift in Sources */,
+				7963900B2011BAA8000B122B /* VideoPlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7968BCDF2011B68B00412D93 /* Main.storyboard */ = {
+		790D7A462011B86A00367249 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7968BCE02011B68B00412D93 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		7968BCE42011B68B00412D93 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7968BCE52011B68B00412D93 /* Base */,
+				790D7A472011B86A00367249 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -163,7 +244,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7968BCE82011B68B00412D93 /* Debug */ = {
+		790D7A4A2011B86A00367249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -220,7 +301,7 @@
 			};
 			name = Debug;
 		};
-		7968BCE92011B68B00412D93 /* Release */ = {
+		790D7A4B2011B86A00367249 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,8 +351,9 @@
 			};
 			name = Release;
 		};
-		7968BCEB2011B68B00412D93 /* Debug */ = {
+		790D7A4D2011B86A00367249 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48307AEA80CFECEEE288BE3E /* Pods-VideoPlayerKVO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -285,8 +367,9 @@
 			};
 			name = Debug;
 		};
-		7968BCEC2011B68B00412D93 /* Release */ = {
+		790D7A4E2011B86A00367249 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FF0E37E464FA0580096437C /* Pods-VideoPlayerKVO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -303,25 +386,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7968BCD32011B68B00412D93 /* Build configuration list for PBXProject "VideoPlayerKVO" */ = {
+		790D7A352011B86A00367249 /* Build configuration list for PBXProject "VideoPlayerKVO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7968BCE82011B68B00412D93 /* Debug */,
-				7968BCE92011B68B00412D93 /* Release */,
+				790D7A4A2011B86A00367249 /* Debug */,
+				790D7A4B2011B86A00367249 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7968BCEA2011B68B00412D93 /* Build configuration list for PBXNativeTarget "VideoPlayerKVO" */ = {
+		790D7A4C2011B86A00367249 /* Build configuration list for PBXNativeTarget "VideoPlayerKVO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7968BCEB2011B68B00412D93 /* Debug */,
-				7968BCEC2011B68B00412D93 /* Release */,
+				790D7A4D2011B86A00367249 /* Debug */,
+				790D7A4E2011B86A00367249 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7968BCD02011B68B00412D93 /* Project object */;
+	rootObject = 790D7A322011B86A00367249 /* Project object */;
 }
